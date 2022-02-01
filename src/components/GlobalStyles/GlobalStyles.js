@@ -68,12 +68,12 @@ html {
   --color-earth: ${COLORS.earth};
   --color-mars: ${COLORS.mars};
   --color-jupiter: ${COLORS.jupiter};
-  --color-satern: ${COLORS.satern};
+  --color-saturn: ${COLORS.saturn};
   --color-uranus: ${COLORS.uranus};
   --color-neptune: ${COLORS.neptune};
 
 
-  --font-weight-regular: ${WEIGHTS.regular};
+  --font-weight-normal: ${WEIGHTS.normal};
   --font-weight-medium: ${WEIGHTS.medium};
   --font-weight-bold: ${WEIGHTS.bold};
 

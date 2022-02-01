@@ -1,20 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from 'styled-components/macro';
+import PLANETS from '../../data';
 
-const Header = () => {
+const Header = ({ setPlanet }) => {
+	const planets = PLANETS.reduce((acc, cur) => {
+		acc.push(cur.name.toLowerCase());
+		return acc;
+	}, [])
   return (
   	<header>
   		<MainHeader>
   			<Logo>The Planets</Logo>
   			<NavLinkGroup>
-  				<NavLink href="/">Mercury</NavLink>
-  				<NavLink href="/">Venus</NavLink>
-  				<NavLink href="/">Earth</NavLink>
-  				<NavLink href="/">Mars</NavLink>
-  				<NavLink href="/">Jupiter</NavLink>
-  				<NavLink href="/">Saturn</NavLink>
-  				<NavLink href="/">Uranus</NavLink>
-  				<NavLink href="/">Neptune</NavLink>
+  			{
+  				planets.map((planet, index) => {
+  					return (
+  						<NavLink
+  							to={`/${planet}`}
+  							onClick={() => setPlanet(index)}
+  						>
+  						{planet}
+  						</NavLink>
+  					)
+  				})
+  			}
   			</NavLinkGroup>
   		</MainHeader>
   	</header>
@@ -25,19 +35,19 @@ const MainHeader = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
-	padding: 33px 40px 32px 27px;
+	align-items: flex-end;
+	padding: 22px 40px 27px 32px;
 	border-bottom: 1px solid var(--color-border);
 `;
 
 const Logo = styled.h2`
 	font-family: var(--font-family-title);
 	font-size: 28px;
-	font-weight: var(--font-weight-regular);
+	font-weight: var(--font-weight-normal);
+	line-height: 36px;
+	letter-spacing: -1.5px;
 	color: var(--color-white);
 	text-transform: uppercase;
-	line-height: 52px;
-	letter-spacing: -1.5px;
 `;
 
 const NavLinkGroup = styled.nav`
@@ -46,15 +56,16 @@ const NavLinkGroup = styled.nav`
 	gap: 33px;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
 	font-family: var(--font-family-text);
 	font-size: 11px;
 	font-weight: var(--font-weight-bold);
-	color: var(--color-white);
-	text-transform: uppercase;
-	text-decoration: none;
 	line-height: 25px;
 	letter-spacing: 1px;
+	color: var(--color-white);
+	opacity: 0.75;
+	text-transform: uppercase;
+	text-decoration: none;
 `;
 
 export default Header;
