@@ -1,16 +1,24 @@
 import React, {useState} from "react";
 import Header from '../Header';
-import Spacer from '../Spacer';
 import MainContent from '../MainContent';
 
 function App() {
 	const [planet, setPlanet] = useState(0);
+	const [content, setContent] = useState(0);
   return (
     <>
-    	<Header setPlanet={setPlanet}/>
-    	<Spacer size={20}/>
+    	<Header
+    		planet={planet}
+    		setPlanet={setPlanet}
+    		content={content}
+    		setContent={setContent}
+    	/>
     	<main>
-    		<MainContent planet={planet}/>
+    		<MainContent
+    			planet={planet}
+    			content={content}
+    			setContent={setContent}
+    		/>
     	</main>
     </>
   );

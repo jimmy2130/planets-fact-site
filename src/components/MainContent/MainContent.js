@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components/macro';
-
+import { QUERIES, SCALE } from '../../constants';
 import PLANETS from '../../data';
 
-const MainContent = ({ planet }) => {
+const MainContent = ({ planet, content, setContent }) => {
 	const planets = PLANETS.reduce((acc, cur) => {
 		acc.push(cur.name.toLowerCase());
 		return acc;
@@ -13,7 +13,7 @@ const MainContent = ({ planet }) => {
 	const buttonText = ['Overview', 'Internal Structure', 'Surface Geology'];
 	const factKeys = ['rotation', 'revolution', 'radius', 'temperature'];
 	const factText = ['Rotation Time', 'Revolution Time', 'Radius', 'Average Temp.']
-	const [content, setContent] = useState(0);
+
   return (
   	<Wrapper>  		
 			<ContentWrapper>
@@ -47,6 +47,7 @@ const MainContent = ({ planet }) => {
 							</Link>
 						</SourceWrapper>
 					</TextWrapper>
+					<Spacer/>
 					<ButtonGroup>
 					{
 						buttonText.map((item, index) => {
@@ -89,14 +90,25 @@ const MainContent = ({ planet }) => {
 };
 
 const Wrapper = styled.div`
-	padding-left: 35px;
-	padding-right: 35px;
+	padding: 20px 35px 56px 35px;
+
+	@media ${QUERIES.tabletAndDown} {
+		padding: 16px 40px 36px 40px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		padding: 0px 24px 47px 24px;
+	}
 `;
 
 const ContentWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	// border: 1px solid white;
+
+	@media ${QUERIES.tabletAndDown} {
+		flex-direction: column;
+	}
 `;
 
 const HeroImageWrapper = styled.div`
@@ -104,9 +116,26 @@ const HeroImageWrapper = styled.div`
 	flex: 1;
 	display: grid;
 	place-content: center center;
+
+	@media ${QUERIES.tabletAndDown} {
+		flex: revert;
+		height: 444px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		flex: revert;
+		height: 304px;
+	}
 `;
 
 const HeroImage = styled.img`
+	@media ${QUERIES.tabletAndDown} {
+		transform: scale(${SCALE.tablet});	
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		transform: scale(${SCALE.phone});
+	}
 `;
 
 const SurfaceImage = styled.img`
@@ -117,6 +146,19 @@ const SurfaceImage = styled.img`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, 81px);
+
+	@media ${QUERIES.tabletAndDown} {
+		width: calc(163px * ${SCALE.tablet});
+		height: calc(199px * ${SCALE.tablet});
+		transform: translate(-50%, calc(81px * ${SCALE.tablet}));
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		width: calc(163px * ${SCALE.phone});
+		height: calc(199px * ${SCALE.phone});
+		transform: translate(-50%, calc(81px * ${SCALE.phone}));
+
+	}
 `
 
 const InfoWrapper = styled.div`
@@ -124,10 +166,34 @@ const InfoWrapper = styled.div`
 	padding-top: 106px;
 	padding-right: 130px;
 	padding-bottom: 87px;
+
+	@media ${QUERIES.tabletAndDown} {
+		width: revert;
+		padding-top: 0px;
+		padding-right: 0px;
+		padding-bottom: 37px;
+		display: flex;
+		flex-direction: row;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		padding-bottom: 28px;
+		justify-content: center;
+		text-align: center;
+	}
 `;
 
 const TextWrapper = styled.div`
 	margin-bottom: 39px;
+
+	@media ${QUERIES.tabletAndDown} {
+		margin-bottom: 0px;
+		width: calc(50% - 5.5px);
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		width: auto;
+	}
 `;
 
 const Title = styled.h1`
@@ -138,6 +204,17 @@ const Title = styled.h1`
 	line-height: 104px;
 	text-transform: uppercase;
 	margin-bottom: 24px;
+
+	@media ${QUERIES.tabletAndDown} {
+		font-size: 48px;
+		line-height: 62px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		font-size: 40px;
+		line-height: 52px;
+		margin-bottom: 16px;
+	}
 `;
 
 const Text = styled.p`
@@ -150,6 +227,20 @@ const Text = styled.p`
 	font-weight: var(--font-weight-normal);
 	font-size: 14px;
 	line-height: 25px;
+
+	@media ${QUERIES.tabletAndDown} {
+		max-width: 339px;
+		height: 110px;
+		margin-bottom: 32px;
+
+		font-size: 12px;
+		line-height: 22px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		height: 132px;
+		margin-bottom: 10px;
+	}
 `;
 
 const SourceWrapper = styled.div`
@@ -162,6 +253,14 @@ const SourceWrapper = styled.div`
 	font-weight: var(--font-weight-normal);
 	font-size: 14px;
 	line-height: 25px;
+
+	@media ${QUERIES.tabletAndDown} {
+		font-size: 12px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		justify-content: center;
+	}
 `
 
 const Source = styled.span`
@@ -182,12 +281,36 @@ const Icon = styled.img`
 	width: 12px;
 	height: 12px;
 	margin-bottom: 4px;
-`
+
+	@media ${QUERIES.tabletAndDown} {
+		margin-bottom: 2px;
+	}
+`;
+
+const Spacer = styled.div`
+	display: none;
+	@media ${QUERIES.tabletAndDown} {
+		display: block;
+		flex: 1;
+	}
+	@media ${QUERIES.phoneAndDown} {
+		display: none;
+	}
+`;
 
 const ButtonGroup = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+
+	@media ${QUERIES.tabletAndDown} {
+		padding-top: 56px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		padding: 0px;
+		display: none;
+	}
 `;
 
 const Button = styled.button`
@@ -205,11 +328,8 @@ const Button = styled.button`
 	cursor: pointer;
 
 	font-family: var(--font-family-text);
-	font-size: 12px;
 	font-weight: var(--font-weight-bold);
-	line-height: 25px;
 	color: var(--color-white);
-	letter-spacing: 2.6px;
 	text-transform: uppercase;
 
 	&:hover {
@@ -217,43 +337,111 @@ const Button = styled.button`
 		background-clip: padding-box;
 		border: 1px solid var(--hover);
 	}
+
+	@media ${QUERIES.tabletAndDown} {
+		gap: calc(var(--gap) - 11px);
+		height: 40px;
+		width: 281px;
+		padding: 8px 20px;
+	}
 `;
 
 const ButtonText = styled.div`
+	font-size: 12px;
+	line-height: 25px;
+	letter-spacing: 2.6px;
+
+	@media ${QUERIES.tabletAndDown} {
+		transform-origin: left;
+		transform: scale(calc(9 / 12));
+		letter-spacing: 1.9px;
+	}
 `;
 
 const Index = styled.div`
+	font-size: 12px;
+	line-height: 25px;
+	letter-spacing: 2.6px;
 	opacity: 0.5;
+
+	@media ${QUERIES.tabletAndDown} {
+		transform-origin: left;
+		transform: scale(calc(9 / 12));
+		letter-spacing: 1.9px;
+	}
 `;
 
 const FactList = styled.ul`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding-right: 130px;
-	padding-bottom: 56px;
+	gap: 30px;
+
 	padding-left: 130px;
+	padding-right: 130px;
+
+	@media ${QUERIES.tabletAndDown} {
+		padding-left: 0px;
+		padding-right: 0px;
+		gap: 11px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 8px;
+	}
 `
 
 const ListItem = styled.li`
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-	width: 255px;
-	height: 128px;
 	padding: 20px 23px;
 	border: 1px solid var(--color-border);
+
+	@media ${QUERIES.tabletAndDown} {
+		padding: 16px 15px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		padding: 8px 24px 8px 24px;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: revert;
+	}
 `
 
 const ListTitle = styled.h4`
 	font-family: var(--font-family-text);
 	font-weight: var(--font-weight-bold); 
-	font-size: 11px;
+	font-size: 12px;
 	line-height: 25px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: var(--color-white);
 	opacity: 0.5;
+
+	transform-origin: left;
+	transform: scale(calc(11 / 12));
+
+	@media ${QUERIES.tabletAndDown} {
+		// transform-origin: left;
+		transform: scale(calc(10 / 12));
+		width: max-content;
+		// font-size: 8px;
+		line-height: 16px;
+		letter-spacing: 0.73px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		transform: revert;
+		width: auto;
+		font-size: 12px;
+		margin-top: 2px;
+	}
 `;
 
 const ListNum = styled.h2`
@@ -264,6 +452,19 @@ const ListNum = styled.h2`
 	letter-spacing: -1.5px;
 	text-transform: uppercase;
 	color: var(--color-white);
+
+	@media ${QUERIES.tabletAndDown} {
+		font-size: 24px;
+		line-height: 31px;
+		letter-spacing: -0.9px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		font-size: 20px;
+		line-height: 26px;
+		letter-spacing: -0.75px;
+		margin-bottom: 4px;
+	}
 `;
 
 export default MainContent;

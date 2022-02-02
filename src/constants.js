@@ -22,13 +22,21 @@ export const WEIGHTS = {
 	bold: 700,
 };
 
-export const BREAKPOINTS = {
-
+export const SCALE = {
+	desktop: 1,
+	tablet: 0.633,
+	phone: 0.384,
 };
+
+const BREAKPOINTS = {
+  tabletMax: 1300,
+  phoneMax: 750,
+}
 
 export const QUERIES = {
-
-};
+  'tabletAndDown': `(max-width: ${BREAKPOINTS.tabletMax / 16}rem)`,
+  'phoneAndDown': `(max-width: ${BREAKPOINTS.phoneMax / 16}rem)`,
+}
 
 export const FAMILIES = {
 	title: '"Antonio", serif',
