@@ -92,7 +92,7 @@ const MainContent = ({ planet, content, setContent }) => {
   );
 };
 
-const Wrapper = styled.main`
+const Wrapper = styled.div`
 	padding: 20px 35px 56px 35px;
 
 	@media ${QUERIES.tabletAndDown} {
@@ -346,7 +346,7 @@ const Button = styled.button`
 	}
 `;
 
-const ButtonIndex = styled.div`
+const ButtonIndex = styled.span`
 	font-size: calc(12 / 16 * 1rem);
 	line-height: 25px;
 	letter-spacing: 2.6px;
@@ -359,7 +359,7 @@ const ButtonIndex = styled.div`
 	}
 `;
 
-const ButtonText = styled.div`
+const ButtonText = styled.span`
 	font-size: calc(12 / 16 * 1rem);
 	line-height: 25px;
 	letter-spacing: 2.6px;
