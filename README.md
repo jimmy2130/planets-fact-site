@@ -11,10 +11,8 @@ This is a solution to the [Planets fact site challenge on Frontend Mentor](https
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -29,13 +27,11 @@ Users should be able to:
 ### Screenshot
 
 ![Desktop-sized screenshot](/screenshots/screenshot-desktop.png)
-![Tablet-sized screenshot](/screenshots/screenshot-tablet.png)
-![Mobile-sized screenshot](/screenshots/screenshot-mobile.png)
 
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Planets Fact Site](https://planets-fact-site-hwg3twird-jimmy2130.vercel.app/)
 
 ## My process
 
@@ -47,42 +43,17 @@ Users should be able to:
 
 ### What I learned
 
-TODO
-
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-### Continued development
-
-TODO
-
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+1. Use `transform: scale()` to make texts smaller than 12px.
+2. Use Figma's Ruler to measure the design mockup.
 
 ### Useful resources
 
 - [UseStickyState hook](https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage/) - This helped me persist the states in local storage.
 
+- [ShiftBy component](https://www.joshwcomeau.com/snippets/react-components/shift-by/) - This handy component helped me shift texts by few pixels in order to achieve optical alignment.
+
+- [CSS-for-JS course by Josh W Comeau](https://css-for-js.dev) - Recommended CSS course. 
+
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/jimmy2130)
-
-## Acknowledgments
-
-TODO
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+- Frontend Mentor - [@jimmy2130](https://www.frontendmentor.io/profile/jimmy2130)
