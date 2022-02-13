@@ -32,17 +32,17 @@ const MobileMenu = ({ setPlanet, isOpen, onDismiss, title }) => {
 										onDismiss()
 									}}
 								>
-								<ColorBall
-									style={{
-										'--color': `var(--color-${planet.toLowerCase()})`
-									}}
-								/>
-								{planet}
-								<Spacer></Spacer>
-								<Icon
-									alt=""
-									src={"/assets/icon-chevron.svg"}
-								/>
+									<ColorBall
+										style={{
+											'--color': `var(--color-${planet.toLowerCase()})`
+										}}
+									/>
+									{planet}
+									<Spacer></Spacer>
+									<Icon
+										alt=""
+										src={"/assets/icon-chevron.svg"}
+									/>
 								</NavLink>
 							)
 						})
@@ -86,7 +86,7 @@ const NavLink = styled(Link)`
 
 	font-family: var(--font-family-text);
 	font-weight: var(--font-weight-bold);
-	font-size: 15px;
+	font-size: calc(15 / 16 * 1rem);
 	line-height: 25px;
 	letter-spacing: 1.36px;
 	text-transform: uppercase;

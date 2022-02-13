@@ -15,17 +15,32 @@ const Header = ({ planet, setPlanet, content, setContent }) => {
   return (
   	<header>
   		<MainHeader>
-  			<Logo>The Planets</Logo>
+  			<LogoLink
+  				to={'/'}
+  				onClick={() => {
+  					setPlanet(0)
+  					setContent(0)
+  				}}
+  			>
+  				<Logo>The Planets</Logo>
+  			</LogoLink>  			
   			<NavLinkGroup>
   			{
-  				planets.map((planet, index) => {
+  				planets.map((nav, index) => {
   					return (
-  						<NavLink
-  							to={`/${planet}`}
-  							onClick={() => setPlanet(index)}
-  						>
-  						{planet}
-  						</NavLink>
+  						<NavLinkWrapper>
+	  						<NavLink
+	  							to={`/${nav}`}
+	  							onClick={() => setPlanet(index)}
+	  						>
+	  						{nav}
+	  						</NavLink>
+	  						<NavLine
+	  							style={{
+	  								'--hover': `var(--color-${planets[index]})`,
+	  							}}
+	  						/>
+	  					</NavLinkWrapper>
   					)
   				})
   			}
@@ -35,11 +50,12 @@ const Header = ({ planet, setPlanet, content, setContent }) => {
   				style={{
   					'--opacity': showMobileMenu ? '0.25' : '1',
   				}}
-  				alt=""
+  				alt="A hamburger icon to toggle the mobile menu"
   				src={"/assets/icon-hamburger.svg"}
   			/>
   		</MainHeader>
-  		<SecondaryHeader>
+  		<MobileHeader>
+  			<NavListItemWrapper>
   			{
   				navList.map((item, index) => {
   					return (
@@ -53,7 +69,8 @@ const Header = ({ planet, setPlanet, content, setContent }) => {
   					)
   				})
   			}
-  		</SecondaryHeader>
+  			</NavListItemWrapper>
+  		</MobileHeader>
       <MobileMenu
       	setPlanet={setPlanet}
         title="Menu"
@@ -64,7 +81,7 @@ const Header = ({ planet, setPlanet, content, setContent }) => {
   );
 };
 
-const MainHeader = styled.div`
+const MainHeader = styled.nav`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -76,7 +93,7 @@ const MainHeader = styled.div`
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
-		gap: 39px;
+		gap: 37px;
 		padding: 32px 52px 27px 52px;
 	}
 
@@ -89,9 +106,13 @@ const MainHeader = styled.div`
 	}
 `;
 
+const LogoLink = styled(Link)`
+	text-decoration: none;
+`;
+
 const Logo = styled.h2`
 	font-family: var(--font-family-title);
-	font-size: 28px;
+	font-size: calc(28 / 16 * 1rem);
 	font-weight: var(--font-weight-normal);
 	line-height: 36px;
 	letter-spacing: -1.05px;
@@ -99,20 +120,23 @@ const Logo = styled.h2`
 	text-transform: uppercase;
 `;
 
-const NavLinkGroup = styled.nav`
+const NavLinkGroup = styled.ul`
 	display: flex;
-	flex-direction: row;
-	// gap: 33px;
+	gap: 0px;
 
 	@media ${QUERIES.phoneAndDown} {
 		display: none;
 	}
 `;
 
+const NavLinkWrapper = styled.li`
+	position: relative;
+`;
+
 const NavLink = styled(Link)`
-	padding: 8px 16px 8px 17px;
+	padding: 16px 16px;
 	font-family: var(--font-family-text);
-	font-size: 12px;
+	font-size: calc(12 / 16 * 1rem);
 	font-weight: var(--font-weight-bold);
 	line-height: 25px;
 	letter-spacing: 1px;
@@ -120,6 +144,27 @@ const NavLink = styled(Link)`
 	opacity: 0.75;
 	text-transform: uppercase;
 	text-decoration: none;
+
+	&:hover {
+		opacity: 1;
+	}
+`;
+
+const NavLine = styled.div`
+	position: absolute;
+	top: -33px;
+	left: 16px;
+	right: 16px;
+	height: 4px;
+	background: transparent;
+
+	${NavLink}:hover + & {
+		background: var(--hover);
+	}
+
+	@media ${QUERIES.tabletAndDown} {
+		display: none;
+	}
 `;
 
 const Icon = styled.img`
@@ -131,23 +176,24 @@ const Icon = styled.img`
 	}
 `;
 
-const SecondaryHeader = styled.li`
+const MobileHeader = styled.nav`
+`;
+
+const NavListItemWrapper = styled.ul`
 	display: none;
 	@media ${QUERIES.phoneAndDown} {
 		display: flex;
-		flex-direction: row;
-		padding-left: 24px;
+		justify-content: center;
 		gap: 44px;
-
 		border-bottom: 1px solid var(--color-border);
 	}
 `;
 
-const NavListItem = styled.ul`
+const NavListItem = styled.li`
 	display: block;
 	padding-top: 22px;
 	padding-bottom: 15px;
-	border-bottom: 3px solid var(--borderBottom);
+	border-bottom: 4px solid var(--borderBottom);
 
 	cursor: pointer;
 
@@ -158,7 +204,7 @@ const NavListItem = styled.ul`
 	text-transform: uppercase;
 	color: var(--color-white);
 	opacity: var(--opacity);
-	font-size: 12px;
+	font-size: calc(12 / 16 * 1rem);
 
 	&:hover {
 		opacity: 1;

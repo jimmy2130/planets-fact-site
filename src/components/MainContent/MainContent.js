@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components/macro';
+import ShiftBy from '../ShiftBy';
 import { QUERIES, SCALE } from '../../constants';
 import PLANETS from '../../data';
 
@@ -19,20 +20,22 @@ const MainContent = ({ planet, content, setContent }) => {
 			<ContentWrapper>
 				<HeroImageWrapper>
   				<HeroImage
-  					alt=""  					
+  					alt={`illustration of ${PLANETS[planet]['name']}`}  					
   					src={PLANETS[planet]['images'][imageKeys[content]]}
   				/>
   				<SurfaceImage
   					style={{
   						'--display': content !== 2 ? 'none' : undefined,
   					}}
-  					alt=""
+  					alt={`surface of ${PLANETS[planet]['name']}`}
   					src={PLANETS[planet].images.geology}
   				/>
   			</HeroImageWrapper>
 				<InfoWrapper>
 					<TextWrapper>
-						<Title>{PLANETS[planet].name}</Title>
+						<ShiftBy x={-3}>
+							<Title>{PLANETS[planet].name}</Title>
+						</ShiftBy>
 						<Text>{PLANETS[planet][contentKeys[content]]['content']}</Text>
 						<SourceWrapper>
 							<Source>
@@ -62,7 +65,7 @@ const MainContent = ({ planet, content, setContent }) => {
 									}}
 									onClick={() => setContent(index)}
 								>
-									<Index>0{index + 1}</Index>
+									<ButtonIndex>0{index + 1}</ButtonIndex>
 									<ButtonText>{item}</ButtonText>
 								</Button>
 							)
@@ -89,7 +92,7 @@ const MainContent = ({ planet, content, setContent }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
 	padding: 20px 35px 56px 35px;
 
 	@media ${QUERIES.tabletAndDown} {
@@ -200,44 +203,42 @@ const Title = styled.h1`
 	color: var(--color-white);
 	font-family: var(--font-family-title);
 	font-weight: var(--normal);
-	font-size: 80px;
+	font-size: calc(80 / 16 * 1rem);
 	line-height: 104px;
 	text-transform: uppercase;
 	margin-bottom: 24px;
 
 	@media ${QUERIES.tabletAndDown} {
-		font-size: 48px;
+		font-size: calc(48 / 16 * 1rem);
 		line-height: 62px;
 	}
 
 	@media ${QUERIES.phoneAndDown} {
-		font-size: 40px;
+		font-size: calc(40 / 16 * 1rem);
 		line-height: 52px;
 		margin-bottom: 16px;
 	}
 `;
 
 const Text = styled.p`
-	display: block;
 	height: 150px;
 	margin-bottom: 24px;
 
 	color: var(--color-white);
 	font-family: var(--font-family-text);
 	font-weight: var(--font-weight-normal);
-	font-size: 14px;
+	font-size: calc(14 / 16 * 1rem);
 	line-height: 25px;
 
-	@media ${QUERIES.tabletAndDown} {
-		max-width: 339px;
+	@media ${QUERIES.tabletAndDown} {		
 		height: 110px;
 		margin-bottom: 32px;
-
-		font-size: 12px;
+		font-size: calc(12 / 16 * 1rem);
 		line-height: 22px;
 	}
 
 	@media ${QUERIES.phoneAndDown} {
+		max-width: 327px;
 		height: 132px;
 		margin-bottom: 10px;
 	}
@@ -251,11 +252,11 @@ const SourceWrapper = styled.div`
 	opacity: 0.5;
 	font-family: var(--font-family-text);
 	font-weight: var(--font-weight-normal);
-	font-size: 14px;
+	font-size: calc(14 / 16 * 1rem);
 	line-height: 25px;
 
 	@media ${QUERIES.tabletAndDown} {
-		font-size: 12px;
+		font-size: calc(12 / 16 * 1rem);
 	}
 
 	@media ${QUERIES.phoneAndDown} {
@@ -315,7 +316,6 @@ const ButtonGroup = styled.div`
 
 const Button = styled.button`
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	gap: var(--gap);
 
@@ -346,10 +346,11 @@ const Button = styled.button`
 	}
 `;
 
-const ButtonText = styled.div`
-	font-size: 12px;
+const ButtonIndex = styled.div`
+	font-size: calc(12 / 16 * 1rem);
 	line-height: 25px;
 	letter-spacing: 2.6px;
+	opacity: 0.5;
 
 	@media ${QUERIES.tabletAndDown} {
 		transform-origin: left;
@@ -358,11 +359,10 @@ const ButtonText = styled.div`
 	}
 `;
 
-const Index = styled.div`
-	font-size: 12px;
+const ButtonText = styled.div`
+	font-size: calc(12 / 16 * 1rem);
 	line-height: 25px;
 	letter-spacing: 2.6px;
-	opacity: 0.5;
 
 	@media ${QUERIES.tabletAndDown} {
 		transform-origin: left;
@@ -414,10 +414,10 @@ const ListItem = styled.li`
 	}
 `
 
-const ListTitle = styled.h4`
+const ListTitle = styled.div`
 	font-family: var(--font-family-text);
 	font-weight: var(--font-weight-bold); 
-	font-size: 12px;
+	font-size: calc(12 / 16 * 1rem);
 	line-height: 25px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -428,10 +428,8 @@ const ListTitle = styled.h4`
 	transform: scale(calc(11 / 12));
 
 	@media ${QUERIES.tabletAndDown} {
-		// transform-origin: left;
 		transform: scale(calc(10 / 12));
 		width: max-content;
-		// font-size: 8px;
 		line-height: 16px;
 		letter-spacing: 0.73px;
 	}
@@ -439,28 +437,28 @@ const ListTitle = styled.h4`
 	@media ${QUERIES.phoneAndDown} {
 		transform: revert;
 		width: auto;
-		font-size: 12px;
+		font-size: calc(12 / 16 * 1rem);
 		margin-top: 2px;
 	}
 `;
 
-const ListNum = styled.h2`
+const ListNum = styled.div`
 	font-family: var(--font-family-title);
 	font-weight: var(--font-weight-normal); 
-	font-size: 40px;
+	font-size: calc(40 / 16 * 1rem);
 	line-height: 52px;
 	letter-spacing: -1.5px;
 	text-transform: uppercase;
 	color: var(--color-white);
 
 	@media ${QUERIES.tabletAndDown} {
-		font-size: 24px;
+		font-size: calc(24 / 16 * 1rem);
 		line-height: 31px;
 		letter-spacing: -0.9px;
 	}
 
 	@media ${QUERIES.phoneAndDown} {
-		font-size: 20px;
+		font-size: calc(20 / 16 * 1rem);
 		line-height: 26px;
 		letter-spacing: -0.75px;
 		margin-bottom: 4px;

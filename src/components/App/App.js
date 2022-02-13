@@ -1,10 +1,10 @@
-import React, {useState} from "react";
 import Header from '../Header';
 import MainContent from '../MainContent';
+import { useStickyState } from '../../util';
 
 function App() {
-	const [planet, setPlanet] = useState(0);
-	const [content, setContent] = useState(0);
+	const [planet, setPlanet] = useStickyState(0, "planet");
+	const [content, setContent] = useStickyState(0, "content");
   return (
     <>
     	<Header
